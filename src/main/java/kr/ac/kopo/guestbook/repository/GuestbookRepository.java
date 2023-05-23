@@ -7,3 +7,4 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 public interface GuestbookRepository extends JpaRepository<Guestbook, Long>, QuerydslPredicateExecutor<Guestbook> {
 
 }
+
