@@ -8,6 +8,26 @@
         <button type="button" class="btn btn-outline-primary">Register</button>
       </a>
     </h1>
+    <form action="/guestbook/list" method="get" id="searchForm">
+      <div class="input-group">
+        <input type="hidden" name="page" value="1">
+        <div class="input-group-sm">
+          <select class="form-select-sm" name="type">
+            <option th:selected="${pageRequestDTO.type == mull}">------</option>
+            <option th:selected="${pageRequestDTO.type == 't'}" value="t"> 제목</option>
+            <option th:selected="${pageRequestDTO.type == 'c'}" value="c"> 내용</option>
+            <option th:selected="${pageRequestDTO.type == 'w'}" value="w"> 작성자</option>
+            <option th:selected="${pageRequestDTO.type == 'tc'}" value="t"> 제목 + 내용</option>
+            <option th:selected="${pageRequestDTO.type == 'tcw'}" value="t"> 제목 + 내용 + 작성자</option>
+          </select>
+        </div>
+        <input class="form-control-sm" name="keyword" th:value="${pageRequestDTO.keyword}">
+        <div class="input-group-sm" id="button-addon4">
+          <button class="btn btn-outline-secondary btn-search">Search</button>
+          <button class="btn btn-outline-secondary btn-clear">Clear</button>
+        </div>
+      </div>
+    </form>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -67,6 +87,13 @@
       if(msg){
         $(".modal").show();
       }
+      var searchForm = $("#searchForm");
+      $(".btn-search").click(function (e){
+        searchForm.submit();
+      });
+      $(".btn-clear").click(function (e){
+        searchForm.empty().submit();
+      });
     </script>
   </th:block>
 </th:block>
